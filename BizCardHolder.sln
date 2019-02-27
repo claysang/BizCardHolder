@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizCard.API", "src\BizCard.API\BizCard.API.csproj", "{9B3831B5-3D8A-4CF4-9FF8-145D020A87AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizCard.Core", "src\BizCard.Core\BizCard.Core.csproj", "{1AB6DC16-5324-4C74-890F-0CD93CA333AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{9B3831B5-3D8A-4CF4-9FF8-145D020A87AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B3831B5-3D8A-4CF4-9FF8-145D020A87AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B3831B5-3D8A-4CF4-9FF8-145D020A87AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB6DC16-5324-4C74-890F-0CD93CA333AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB6DC16-5324-4C74-890F-0CD93CA333AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB6DC16-5324-4C74-890F-0CD93CA333AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB6DC16-5324-4C74-890F-0CD93CA333AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
