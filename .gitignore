@@ -9,4 +9,5 @@
 .vs/
 
 *.db
+*.db-journal
 

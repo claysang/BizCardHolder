@@ -17,9 +17,7 @@ namespace BizCard.Core.Data
         {
             var connStr = appConfiguration.GetConnectionString(ConfigKeySqliteConnectionString);
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                 options.UseSqlite(connStr)
-            );
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connStr));
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         }

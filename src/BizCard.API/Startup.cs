@@ -30,7 +30,6 @@ namespace BizCard.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDataServices(Configuration);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +50,11 @@ namespace BizCard.API
 
             app.EnsureDatabase(connStr =>
             {
-                app.ApplicationServices.GetService<ApplicationDbContext>().Database.Migrate();
+                var contextFactory = new ApplicationContextFactory();
+
+                var dbContex = contextFactory.CreateDbContext(connStr);
+
+                dbContex.Database.Migrate();
             });
         }
     }

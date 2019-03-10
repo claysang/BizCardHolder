@@ -22,7 +22,6 @@ namespace BizCard.Core.Data
             .ToList()
             .ForEach(etype => modelBuilder.Entity(etype));
         }
-
     }
 }
 
