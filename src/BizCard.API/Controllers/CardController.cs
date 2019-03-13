@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using BizCard.Core.Data;
 using BizCard.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BizCard.API.Controllers
 {
@@ -16,17 +17,9 @@ namespace BizCard.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult CardInfo()
+        public async Task<IActionResult> CardInfo()
         {
-            var card = new Card
-            {
-                Name = "CS",
-            };
-
-            _cardRepo.Save(card);
-
-            return Ok(new { id = card.Id, name = card.Name });
+            return Ok(await _cardRepo.All().ToListAsync());
         }
-
     }
 }
