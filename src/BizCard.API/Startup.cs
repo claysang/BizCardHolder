@@ -46,7 +46,7 @@ namespace BizCard.API
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseRouting();
 
             app.EnsureDatabase(connStr =>
             {
@@ -55,6 +55,11 @@ namespace BizCard.API
                 var dbContex = contextFactory.CreateDbContext(connStr);
 
                 dbContex.Database.Migrate();
+            });
+            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
             });
         }
     }
