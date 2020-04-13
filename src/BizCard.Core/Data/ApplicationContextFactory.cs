@@ -11,7 +11,7 @@ namespace BizCard.Core.Data
     // https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dbcontext-creation
     public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-        public const string ConfigKeySqliteConnectionString = "sqliteConnectionString";
+        public const string ConfigKeyNpgsqlConnectionString = "npgsqlConnectionString";
 
         private const string ClientAppProjectName = "BizCard.API";
 
@@ -33,7 +33,7 @@ namespace BizCard.Core.Data
 
             var configuration = Configuration(configPath, environmentName).Build();
 
-            var connectionString = configuration.GetConnectionString(ConfigKeySqliteConnectionString);
+            var connectionString = configuration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
 
             return CreateDbContext(connectionString);
         }
@@ -47,7 +47,7 @@ namespace BizCard.Core.Data
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseNpgsql(connectionString);
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

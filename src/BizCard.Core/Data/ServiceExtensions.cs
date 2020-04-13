@@ -2,22 +2,22 @@
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace BizCard.Core.Data
 {
     public static class ServiceExtensions
     {
-        public const string ConfigKeySqliteConnectionString = "sqliteConnectionString";
+        public const string ConfigKeyNpgsqlConnectionString = "npgsqlConnectionString";
 
         public static void AddDataServices(this IServiceCollection services, IConfiguration appConfiguration)
         {
-            var connStr = appConfiguration.GetConnectionString(ConfigKeySqliteConnectionString);
+            var connStr = appConfiguration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connStr));
+            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connStr));
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         }
@@ -28,9 +28,9 @@ namespace BizCard.Core.Data
 
             var appConfiguration = services.GetService<IConfiguration>();
 
-            var connStr = appConfiguration.GetConnectionString(ConfigKeySqliteConnectionString);
+            var connStr = appConfiguration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
 
-            var dataSource = new SqliteConnection(connStr).DataSource;
+            var dataSource = new NpgsqlConnection().DataSource;
 
             if (!File.Exists(dataSource))
             {
