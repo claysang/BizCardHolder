@@ -40,14 +40,14 @@ namespace BizCard.Core.Data
             await _context.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             if(entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -13,6 +13,6 @@ namespace BizCard.Core.Data
 
         void Delete(T entity);
 
-        void Update(T entity);
+        Task Update(T entity);
     }
 }
