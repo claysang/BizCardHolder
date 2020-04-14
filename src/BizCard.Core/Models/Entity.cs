@@ -6,7 +6,7 @@ namespace BizCard.Core.Models
 {
     public abstract class Entity
     {
-        public static readonly DateTime EntityInitialDate = new DateTime(2002, 2, 13, 0, 0, 0, DateTimeKind.Utc);
+        public static readonly DateTime EntityInitialDate = DateTime.Now;
         
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
