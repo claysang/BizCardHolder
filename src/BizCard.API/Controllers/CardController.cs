@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using BizCard.API.ViewModel;
 using BizCard.Core.Data;
 using BizCard.Core.Models;
@@ -43,6 +44,36 @@ namespace BizCard.API.Controllers
             await _cardRepo.Save(card);
 
             return CreatedAtAction(nameof(CardInfo), new { id = card.Id }, "Card created…");
+        }
+        
+        [HttpPut]
+        [Route("edit")]
+        public async Task<ActionResult<object>> EditCard([FromBody] CardViewModel model, [FromQuery] string cardId)
+        {
+
+            var card = _cardRepo.Get(Int32.Parse(cardId));
+            
+            if (card == null)
+            {
+                return BadRequest("Card not found…");
+            }
+
+            var allCardProperties = typeof(CardViewModel).GetProperties();
+
+            foreach (var property in allCardProperties)
+            {
+                var propName = property.Name;
+                var modelValue = property.GetValue(model);
+                
+                if (modelValue != null)
+                {
+                    typeof(Card).GetProperty(propName)?.SetValue(card, modelValue);
+                }
+            }
+
+            await _cardRepo.Update(card);
+
+            return CreatedAtAction(nameof(CardInfo), new { id = cardId }, card);
         }
     }
 }
