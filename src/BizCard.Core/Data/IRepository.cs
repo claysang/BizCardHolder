@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace BizCard.Core.Data
 {
     public interface IRepository<T>
     {
-        void Save(T entity);
+        Task Save(T entity);
 
         IQueryable<T> All();
 

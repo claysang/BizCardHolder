@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using BizCard.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,10 +34,10 @@ namespace BizCard.Core.Data
             _context.SaveChanges();
         }
 
-        public void Save(T entity)
+        public async Task Save(T entity)
         {
             _entities.Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public void Update(T entity)
