@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using BizCard.API.ViewModel;
 using BizCard.Core.Data;
@@ -47,11 +47,11 @@ namespace BizCard.API.Controllers
         }
         
         [HttpPut]
-        [Route("edit")]
-        public async Task<ActionResult<object>> EditCard([FromBody] CardViewModel model, [FromQuery] string cardId)
+        [Route("{cardId?}")]
+        public async Task<ActionResult<object>> EditCard([FromBody] CardViewModel model, int cardId)
         {
 
-            var card = _cardRepo.Get(Int32.Parse(cardId));
+            var card = _cardRepo.Get(cardId);
             
             if (card == null)
             {
