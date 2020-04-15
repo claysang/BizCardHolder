@@ -38,7 +38,9 @@ namespace BizCard.API.Controllers
                 Title = model.Title,
                 Company = model.Company,
                 Contact = model.Contact,
-                Address = model.Address
+                Address = model.Address,
+                CreatedAtUtc = DateTime.Now,
+                ModifiedAtUtc = DateTime.Now
             };
 
             await _cardRepo.Save(card);
@@ -70,6 +72,8 @@ namespace BizCard.API.Controllers
                     typeof(Card).GetProperty(propName)?.SetValue(card, modelValue);
                 }
             }
+            
+            card.ModifiedAtUtc = DateTime.Now;
 
             await _cardRepo.Update(card);
 
