@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using BizCard.API.ViewModel;
 using BizCard.Core.Data;
@@ -74,6 +74,23 @@ namespace BizCard.API.Controllers
             await _cardRepo.Update(card);
 
             return CreatedAtAction(nameof(CardInfo), new { id = cardId }, card);
+        }
+        
+        [HttpDelete]
+        [Route("{cardId?}")]
+        public ActionResult<string> DeleteCard(int cardId)
+        {
+
+            var card = _cardRepo.Get(cardId);
+            
+            if (card == null)
+            {
+                return BadRequest("Card not found…");
+            }
+            
+            _cardRepo.Delete(card);
+
+            return "Card deleted…";
         }
     }
 }
