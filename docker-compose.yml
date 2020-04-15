@@ -10,7 +10,10 @@ services:
     image: postgres:latest
     ports:
     - "5432:5432"
+    volumes:
+    - postgresql:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: leichao
       POSTGRES_PASSWORD: leichao1+1
-    
+volumes:
+  postgresql:
