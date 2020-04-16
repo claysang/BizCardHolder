@@ -4,8 +4,6 @@ WORKDIR /app
 COPY . ./BizCardHolder/
 RUN dotnet restore BizCardHolder
 
-COPY . ./BizCardHolder/
-
 WORKDIR /app/BizCardHolder
 RUN dotnet build -c Debug -o output
 
