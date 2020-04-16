@@ -17,9 +17,11 @@ namespace BizCard.Core.Data
 
         protected virtual IConfigurationBuilder Configuration(string basePath, string environmentName)
         {
+            var jsonFile = environmentName == null ? "appsettings.json" : $"appsettings.{environmentName}.json";
+            
             var builder = new ConfigurationBuilder()
                 .SetBasePath(basePath)
-                .AddJsonFile($"appsettings.{environmentName}.json", true);
+                .AddJsonFile(jsonFile, true);
                 
             return builder;
         }
