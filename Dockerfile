@@ -5,7 +5,7 @@ COPY . ./BizCardHolder/
 RUN dotnet restore BizCardHolder
 
 WORKDIR /app/BizCardHolder
-RUN dotnet build -c Debug -o output
+RUN dotnet publish -c Release -o output
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
