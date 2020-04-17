@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using BizCard.API.ViewModel;
 using BizCard.Core.Data;
 using BizCard.Core.Models;
@@ -12,16 +14,20 @@ namespace BizCard.API.Controllers
     public class CardController : ControllerBase
     {
         private readonly IRepository<Card> _cardRepo;
+        private readonly IMapper _mapper;
 
-        public CardController(IRepository<Card> cardRepo)
+        public CardController(IRepository<Card> cardRepo, IMapper mapper)
         {
             _cardRepo = cardRepo;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> CardInfo()
         {
-            return Ok(await _cardRepo.All().ToListAsync());
+            var cards = await _cardRepo.All().ToListAsync();
+            var cardVms = _mapper.Map<List<Card>, List<CardViewModel>>(cards);
+            return Ok(cardVms);
         }
         
         [HttpPost]
