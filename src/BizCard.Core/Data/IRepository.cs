@@ -5,7 +5,9 @@ namespace BizCard.Core.Data
 {
     public interface IRepository<T>
     {
-        Task Save(T entity);
+        void Save(T entity);
+        
+        Task SaveAsync(T entity);
 
         IQueryable<T> All();
 
@@ -13,6 +15,8 @@ namespace BizCard.Core.Data
 
         void Delete(T entity);
 
-        Task Update(T entity);
+        void Update(T entity);
+        
+        Task UpdateAsync(T entity);
     }
 }

@@ -43,7 +43,7 @@ namespace BizCard.API.Controllers
                 ModifiedAtUtc = DateTime.Now
             };
 
-            await _cardRepo.Save(card);
+            await _cardRepo.SaveAsync(card);
 
             return CreatedAtAction(nameof(CardInfo), new { id = card.Id }, "Card created…");
         }
@@ -75,7 +75,7 @@ namespace BizCard.API.Controllers
             
             card.ModifiedAtUtc = DateTime.Now;
 
-            await _cardRepo.Update(card);
+            await _cardRepo.UpdateAsync(card);
 
             return CreatedAtAction(nameof(CardInfo), new { id = cardId }, card);
         }

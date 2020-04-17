@@ -34,13 +34,29 @@ namespace BizCard.Core.Data
             _context.SaveChanges();
         }
 
-        public async Task Save(T entity)
+        public void Save(T entity)
+        {
+            _entities.Add(entity);
+            _context.SaveChanges();
+        }
+        
+        public async Task SaveAsync(T entity)
         {
             _entities.Add(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Update(T entity)
+        public void Update(T entity)
+        {
+            if(entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            _context.SaveChanges();
+        }
+        
+        public async Task UpdateAsync(T entity)
         {
             if(entity == null)
             {
