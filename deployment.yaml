@@ -16,7 +16,7 @@ spec:
         app: bizcardholder-app
     spec:
       containers:
-        - name: bch
+        - name: bizcardholder
           image: localhost:5000/biz-card-holder
           ports:
             - containerPort: 80
