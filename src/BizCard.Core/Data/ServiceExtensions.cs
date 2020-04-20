@@ -15,7 +15,9 @@ namespace BizCard.Core.Data
         {
             var connStr = appConfiguration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connStr));
+            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+                options.UseInternalServiceProvider(serviceProvider).UseNpgsql(connStr)
+            );
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         }
