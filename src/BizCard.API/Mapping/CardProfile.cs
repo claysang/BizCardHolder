@@ -9,6 +9,7 @@ namespace BizCard.API.Mapping
         public CardProfile()
         {
             CreateMap<Card, CardViewModel>();
+            CreateMap<CardViewModel, Card>();
         }
     }
 }

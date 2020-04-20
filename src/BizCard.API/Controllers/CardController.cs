@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -38,16 +38,7 @@ namespace BizCard.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var card = new Card
-            {
-                Name = model.Name,
-                Title = model.Title,
-                Company = model.Company,
-                Contact = model.Contact,
-                Address = model.Address,
-                CreatedAtUtc = DateTime.Now,
-                ModifiedAtUtc = DateTime.Now
-            };
+            var card = _mapper.Map<CardViewModel, Card>(model);
 
             await _cardRepo.SaveAsync(card);
 
