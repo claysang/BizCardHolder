@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizCard.API", "src\BizCard.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizCard.Core", "src\BizCard.Core\BizCard.Core.csproj", "{1AB6DC16-5324-4C74-890F-0CD93CA333AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizCard.API.UnitTests", "tests\BizCard.API.UnitTests\BizCard.API.UnitTests.csproj", "{A5277EE5-02C1-4896-8763-C2901B6BCF56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{1AB6DC16-5324-4C74-890F-0CD93CA333AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AB6DC16-5324-4C74-890F-0CD93CA333AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AB6DC16-5324-4C74-890F-0CD93CA333AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5277EE5-02C1-4896-8763-C2901B6BCF56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5277EE5-02C1-4896-8763-C2901B6BCF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5277EE5-02C1-4896-8763-C2901B6BCF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5277EE5-02C1-4896-8763-C2901B6BCF56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
