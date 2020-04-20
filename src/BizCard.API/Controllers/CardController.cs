@@ -31,7 +31,7 @@ namespace BizCard.API.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult<object>> AddCard([FromBody] CardViewModel vm)
+        public async Task<IActionResult> AddCard([FromBody] CardViewModel vm)
         {
             if (!ModelState.IsValid)
             {
@@ -42,12 +42,12 @@ namespace BizCard.API.Controllers
 
             await _cardRepo.SaveAsync(card);
 
-            return CreatedAtAction(nameof(CardInfo), new { id = card.Id }, "Card created…");
+            return CreatedAtAction(nameof(CardInfo), vm);
         }
         
         [HttpPut]
         [Route("{cardId?}")]
-        public async Task<ActionResult<object>> EditCard([FromBody] CardViewModel vm, int cardId)
+        public async Task<IActionResult> EditCard([FromBody] CardViewModel vm, int cardId)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace BizCard.API.Controllers
             
             if (card == null)
             {
-                return BadRequest("Card not found…");
+                return NotFound("Card not found…");
             }
 
             var vmProperties = typeof(CardViewModel).GetProperties();
@@ -75,24 +75,23 @@ namespace BizCard.API.Controllers
 
             await _cardRepo.UpdateAsync(card);
 
-            return CreatedAtAction(nameof(CardInfo), new { id = cardId }, card);
+            return Ok(card);
         }
         
         [HttpDelete]
         [Route("{cardId?}")]
-        public ActionResult<string> DeleteCard(int cardId)
+        public IActionResult DeleteCard(int cardId)
         {
-
             var card = _cardRepo.Get(cardId);
             
             if (card == null)
             {
-                return BadRequest("Card not found…");
+                return NotFound("Card not found…");
             }
             
             _cardRepo.Delete(card);
 
-            return "Card deleted…";
+            return Ok(card);
         }
     }
 }
