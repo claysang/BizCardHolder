@@ -31,14 +31,14 @@ namespace BizCard.API.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult<object>> AddCard([FromBody] CardViewModel model)
+        public async Task<ActionResult<object>> AddCard([FromBody] CardViewModel vm)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var card = _mapper.Map<CardViewModel, Card>(model);
+            var card = _mapper.Map<CardViewModel, Card>(vm);
 
             await _cardRepo.SaveAsync(card);
 
