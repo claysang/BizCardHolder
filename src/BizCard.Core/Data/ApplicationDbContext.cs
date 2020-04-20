@@ -17,11 +17,10 @@ namespace BizCard.Core.Data
             var entityType = typeof(Entity);
 
             entityType.Assembly
-            .GetExportedTypes()
-            .Where(type => !type.IsAbstract && !type.IsInterface && entityType.IsAssignableFrom(type))
-            .ToList()
-            .ForEach(etype => modelBuilder.Entity(etype));
+                .GetExportedTypes()
+                .Where(type => !type.IsAbstract && !type.IsInterface && entityType.IsAssignableFrom(type))
+                .ToList()
+                .ForEach(etype => modelBuilder.Entity(etype));
         }
     }
 }
-

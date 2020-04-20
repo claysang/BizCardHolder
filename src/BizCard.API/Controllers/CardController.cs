@@ -29,7 +29,7 @@ namespace BizCard.API.Controllers
             var cardVms = _mapper.Map<List<Card>, List<CardViewModel>>(cards);
             return Ok(cardVms);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> AddCard([FromBody] CardViewModel vm)
         {
@@ -44,7 +44,7 @@ namespace BizCard.API.Controllers
 
             return CreatedAtAction(nameof(CardInfo), vm);
         }
-        
+
         [HttpPut]
         [Route("{cardId?}")]
         public async Task<IActionResult> EditCard([FromBody] CardViewModel vm, int cardId)
@@ -53,9 +53,9 @@ namespace BizCard.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             var card = _cardRepo.Get(cardId);
-            
+
             if (card == null)
             {
                 return NotFound("Card not found…");
@@ -67,28 +67,28 @@ namespace BizCard.API.Controllers
             {
                 var propName = property.Name;
                 var vmValue = property.GetValue(vm);
-                
+
                 typeof(Card).GetProperty(propName)?.SetValue(card, vmValue);
             }
-            
+
             card.ModifiedAtUtc = DateTime.Now;
 
             await _cardRepo.UpdateAsync(card);
 
             return Ok(card);
         }
-        
+
         [HttpDelete]
         [Route("{cardId?}")]
         public IActionResult DeleteCard(int cardId)
         {
             var card = _cardRepo.Get(cardId);
-            
+
             if (card == null)
             {
                 return NotFound("Card not found…");
             }
-            
+
             _cardRepo.Delete(card);
 
             return Ok(card);

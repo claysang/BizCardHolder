@@ -49,15 +49,12 @@ namespace BizCard.API
             {
                 var contextFactory = new ApplicationContextFactory();
 
-                var dbContex = contextFactory.CreateDbContext(connStr);
+                var dbContext = contextFactory.CreateDbContext(connStr);
 
-                dbContex.Database.Migrate();
+                dbContext.Database.Migrate();
             });
-            
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

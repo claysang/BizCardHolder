@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BizCard.Core.Data
 {
-    public class EfRepository<T> : IRepository<T> where T: Entity
+    public class EfRepository<T> : IRepository<T> where T : Entity
     {
         private readonly ApplicationDbContext _context;
 
@@ -39,7 +39,7 @@ namespace BizCard.Core.Data
             _entities.Add(entity);
             _context.SaveChanges();
         }
-        
+
         public async Task SaveAsync(T entity)
         {
             _entities.Add(entity);
@@ -48,17 +48,17 @@ namespace BizCard.Core.Data
 
         public void Update(T entity)
         {
-            if(entity == null)
+            if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }
 
             _context.SaveChanges();
         }
-        
+
         public async Task UpdateAsync(T entity)
         {
-            if(entity == null)
+            if (entity == null)
             {
                 throw new ArgumentNullException(nameof(entity));
             }

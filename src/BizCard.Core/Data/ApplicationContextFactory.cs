@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-
 namespace BizCard.Core.Data
 {
     // https://stackoverflow.com/questions/47473277/entity-framework-core-migration-connection-string
@@ -14,17 +13,6 @@ namespace BizCard.Core.Data
         public const string ConfigKeyNpgsqlConnectionString = "npgsqlConnectionString";
 
         private const string ClientAppProjectName = "BizCard.API";
-
-        protected virtual IConfigurationBuilder Configuration(string basePath, string environmentName)
-        {
-            var jsonFile = environmentName == null ? "appsettings.json" : $"appsettings.{environmentName}.json";
-            
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(basePath)
-                .AddJsonFile(jsonFile, true);
-                
-            return builder;
-        }
 
         public ApplicationDbContext CreateDbContext(string[] args)
         {
@@ -38,6 +26,17 @@ namespace BizCard.Core.Data
             var connectionString = configuration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
 
             return CreateDbContext(connectionString);
+        }
+
+        protected virtual IConfigurationBuilder Configuration(string basePath, string environmentName)
+        {
+            var jsonFile = environmentName == null ? "appsettings.json" : $"appsettings.{environmentName}.json";
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(basePath)
+                .AddJsonFile(jsonFile, true);
+
+            return builder;
         }
 
         public ApplicationDbContext CreateDbContext(string connectionString)
@@ -58,8 +57,10 @@ namespace BizCard.Core.Data
         {
             var basePath = AppContext.BaseDirectory;
 
-            var relativePath = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.LastIndexOf("/bin", StringComparison.InvariantCultureIgnoreCase));
-            var appRoot = relativePath.Substring(0, relativePath.LastIndexOf("/", StringComparison.InvariantCultureIgnoreCase) + 1);
+            var relativePath = AppContext.BaseDirectory.Substring(0,
+                AppContext.BaseDirectory.LastIndexOf("/bin", StringComparison.InvariantCultureIgnoreCase));
+            var appRoot = relativePath.Substring(0,
+                relativePath.LastIndexOf("/", StringComparison.InvariantCultureIgnoreCase) + 1);
 
             return appRoot;
         }
