@@ -8,7 +8,7 @@ namespace BizCard.API.UnitTests
         [Fact]
         public void Test1()
         {
-            true.Should().BeFalse();
+            true.Should().BeTrue();
         }
     }
 }
