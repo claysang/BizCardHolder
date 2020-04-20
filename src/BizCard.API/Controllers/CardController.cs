@@ -47,9 +47,13 @@ namespace BizCard.API.Controllers
         
         [HttpPut]
         [Route("{cardId?}")]
-        public async Task<ActionResult<object>> EditCard([FromBody] CardViewModel model, int cardId)
+        public async Task<ActionResult<object>> EditCard([FromBody] CardViewModel vm, int cardId)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
             var card = _cardRepo.Get(cardId);
             
             if (card == null)
@@ -57,17 +61,14 @@ namespace BizCard.API.Controllers
                 return BadRequest("Card not found…");
             }
 
-            var allCardProperties = typeof(CardViewModel).GetProperties();
+            var vmProperties = typeof(CardViewModel).GetProperties();
 
-            foreach (var property in allCardProperties)
+            foreach (var property in vmProperties)
             {
                 var propName = property.Name;
-                var modelValue = property.GetValue(model);
+                var vmValue = property.GetValue(vm);
                 
-                if (modelValue != null)
-                {
-                    typeof(Card).GetProperty(propName)?.SetValue(card, modelValue);
-                }
+                typeof(Card).GetProperty(propName)?.SetValue(card, vmValue);
             }
             
             card.ModifiedAtUtc = DateTime.Now;
