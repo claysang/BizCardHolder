@@ -22,6 +22,16 @@ namespace BizCard.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "_myAllowSpecificOrigins",
+                                        builder =>
+                                    {
+                                        builder.WithOrigins("*");
+                                        builder.AllowAnyHeader();
+                                    });
+            });
+
             services.AddMvc();
 
             services.AddDataServices(Configuration);
@@ -41,6 +51,8 @@ namespace BizCard.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors("_myAllowSpecificOrigins");
 
             app.UseHttpsRedirection();
             app.UseRouting();

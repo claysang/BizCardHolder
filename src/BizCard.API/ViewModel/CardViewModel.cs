@@ -9,6 +9,8 @@ namespace BizCard.API.ViewModel
 
         public string Title { get; set; }
 
+        public string Id { get; set;}
+
         [Required(ErrorMessage = "Company is required")]
         public string Company { get; set; }
 
