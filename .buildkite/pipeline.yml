@@ -1,3 +1,3 @@
 steps:
   - label: ":rocket: Deploy"
-    command: ls /buildkite-secrets
+    command: ./ops/deploy
