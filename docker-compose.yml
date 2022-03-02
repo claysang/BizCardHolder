@@ -1,26 +1,38 @@
-version: '3'
+version: "3.7"
+
 services:
   api:
     build: .
     ports:
-    - "65432:80"
+      - "65432:80"
     networks:
       - greatBE
     depends_on:
       - database
   database:
     image: postgres:latest
+    # entrypoint: "cat /run/secrets/POSTGRES_PASSWORD"
     ports:
-    - "5432:5432"
+      - "5432:5432"
     networks:
       - greatBE
     volumes:
-    - postgresql:/var/lib/postgresql/data
+      - postgresql:/var/lib/postgresql/data
+      # - ./secrets:/run/secrets
     environment:
-      POSTGRES_USER: leichao
-      POSTGRES_PASSWORD: leichao1+1
+      POSTGRES_USER_FILE: /run/secrets/POSTGRES_USER
+      POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
+    secrets:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
 volumes:
   postgresql:
 
 networks:
   greatBE:
+
+secrets:
+  POSTGRES_USER:
+    file: ./secrets/postgres_usr.txt
+  POSTGRES_PASSWORD:
+    file: ./secrets/postgres_pwd.txt
