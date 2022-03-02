@@ -33,6 +33,6 @@ networks:
 
 secrets:
   POSTGRES_USER:
-    file: buildkite-secrets/postgres_usr.txt
+    file: /buildkite-secrets/postgres_usr.txt
   POSTGRES_PASSWORD:
-    file: buildkite-secrets/postgres_pwd.txt
+    file: /buildkite-secrets/postgres_pwd.txt
