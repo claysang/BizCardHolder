@@ -1,5 +1,5 @@
 steps:
-  - label: ":docker: build"
+  - label: ":docker: Build"
     command: ./ops/build
 
   - wait
