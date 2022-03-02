@@ -22,17 +22,17 @@ services:
     environment:
       POSTGRES_USER_FILE: /run/secrets/POSTGRES_USER
       POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
-    secrets:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
+    # secrets:
+    #   - POSTGRES_USER
+    #   - POSTGRES_PASSWORD
 volumes:
   postgresql:
 
 networks:
   greatBE:
 
-secrets:
-  POSTGRES_USER:
-    file: /buildkite-secrets/postgres_usr.txt
-  POSTGRES_PASSWORD:
-    file: /buildkite-secrets/postgres_pwd.txt
+# secrets:
+#   POSTGRES_USER:
+#     file: /buildkite-secrets/postgres_usr.txt
+#   POSTGRES_PASSWORD:
+#     file: /buildkite-secrets/postgres_pwd.txt
