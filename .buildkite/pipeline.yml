@@ -1,3 +1,13 @@
 steps:
+  - label: ":docker: build"
+    command: ./ops/build
+
+  - wait
+
+  - label: ":battery: Publish Image"
+    command: ./ops/pushImage
+
+  - wait
+
   - label: ":rocket: Deploy"
     command: ./ops/deploy

@@ -2,9 +2,12 @@ version: "3.7"
 
 services:
   api:
+    image: 127.0.0.1:5000/bch-be
     build: .
     ports:
-      - "65432:80"
+      - target: 80
+        published: 65432
+        mode: host
     networks:
       - greatBE
     depends_on:
@@ -13,7 +16,9 @@ services:
     image: postgres:latest
     # entrypoint: "cat /run/secrets/POSTGRES_PASSWORD"
     ports:
-      - "5432:5432"
+      - target: 5432
+        published: 5432
+        mode: host
     networks:
       - greatBE
     volumes:
@@ -22,17 +27,17 @@ services:
     environment:
       POSTGRES_USER_FILE: /run/secrets/POSTGRES_USER
       POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
-    # secrets:
-    #   - POSTGRES_USER
-    #   - POSTGRES_PASSWORD
+    secrets:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
 volumes:
   postgresql:
 
 networks:
   greatBE:
 
-# secrets:
-#   POSTGRES_USER:
-#     file: /buildkite-secrets/postgres_usr.txt
-#   POSTGRES_PASSWORD:
-#     file: /buildkite-secrets/postgres_pwd.txt
+secrets:
+  POSTGRES_USER:
+    external: true
+  POSTGRES_PASSWORD:
+    external: true
