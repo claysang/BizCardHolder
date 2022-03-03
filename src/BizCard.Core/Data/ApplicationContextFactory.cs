@@ -34,7 +34,8 @@ namespace BizCard.Core.Data
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(basePath)
-                .AddJsonFile(jsonFile, true);
+                .AddJsonFile(jsonFile, true)
+                .AddEnvironmentVariables();
 
             return builder;
         }

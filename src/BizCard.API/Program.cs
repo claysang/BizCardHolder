@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Mcrio.Configuration.Provider.Docker.Secrets;
 
 namespace BizCard.API
 {
@@ -13,6 +14,17 @@ namespace BizCard.API
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(configBuilder =>
+                    {
+                      configBuilder.AddDockerSecrets(
+                              allowedPrefixesEnvVariableName: "MY_SECRETS_PREFIXES"
+                          );
+                      // allow command line arguments to override docker secrets
+                      //   if (args != null)
+                      //   {
+                      //     configBuilder.AddCommandLine(args);
+                      //   }
+                    })
                 .UseStartup<Startup>();
         }
     }

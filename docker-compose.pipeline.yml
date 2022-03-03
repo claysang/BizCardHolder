@@ -10,6 +10,13 @@ services:
         mode: host
     networks:
       - greatBE
+    environment:
+      MY_SECRETS_PREFIXES: ConnectionStrings
+    secrets:
+      - source: POSTGRES_USER
+        target: ConnectionStrings__user
+      - source: POSTGRES_PASSWORD
+        target: ConnectionStrings__password
     depends_on:
       - database
   database:

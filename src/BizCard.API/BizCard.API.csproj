@@ -11,5 +11,6 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+      <PackageReference Include="Mcrio.Configuration.Provider.Docker.Secrets" Version="1.0.1" />
     </ItemGroup>
 </Project>
