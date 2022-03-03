@@ -29,7 +29,9 @@ namespace BizCard.Core.Data
         {
             var services = app.ApplicationServices;
             var appConfiguration = services.GetService<IConfiguration>();
-            var connStr = appConfiguration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
+            var dbUser = appConfiguration.GetConnectionString("user");
+            var dbPwd = appConfiguration.GetConnectionString("password");
+            var connStr = "User ID =" + dbUser + ";Password=" + dbPwd + ";Server=database;Port=5432;Database=leichao;Pooling=true;";
 
             services.GetService<IApplicationLifetime>()
                 .ApplicationStarted
