@@ -14,5 +14,5 @@ steps:
 
   - block: ":rocket: WAIT WAIT WAIT! PROD PROD PROD!"
 
-  - label: ":battery: Deploy to PROD"
+  - label: ":rocket: Deploy to PROD"
     command: ./ops/deployProd
