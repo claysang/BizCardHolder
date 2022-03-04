@@ -12,7 +12,6 @@ services:
       - greatBE
     environment:
       MY_SECRETS_PREFIXES: ConnectionStrings
-      ConnectionStrings__port: 54333
       ConnectionStrings__url: database-prod
     secrets:
       - source: POSTGRES_USER
