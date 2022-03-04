@@ -19,7 +19,7 @@ services:
       - source: POSTGRES_PASSWORD
         target: ConnectionStrings__password
     depends_on:
-      - database
+      - database-prod
   database-prod:
     image: postgres:latest
     # entrypoint: "cat /run/secrets/POSTGRES_PASSWORD"
