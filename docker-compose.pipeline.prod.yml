@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+  api-prod:
+    image: 127.0.0.1:5000/bch-be
+    build: .
+    ports:
+      - target: 80
+        published: 65123
+        mode: host
+    networks:
+      - greatBE
+    environment:
+      MY_SECRETS_PREFIXES: ConnectionStrings
+    secrets:
+      - source: POSTGRES_USER
+        target: ConnectionStrings__user
+      - source: POSTGRES_PASSWORD
+        target: ConnectionStrings__password
+    depends_on:
+      - database
+  database-prod:
+    image: postgres:latest
+    # entrypoint: "cat /run/secrets/POSTGRES_PASSWORD"
+    ports:
+      - target: 5432
+        published: 54333
+        mode: host
+    networks:
+      - greatBE
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+      # - ./secrets:/run/secrets
+    environment:
+      POSTGRES_USER_FILE: /run/secrets/POSTGRES_USER
+      POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
+    secrets:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+volumes:
+  postgresql:
+
+networks:
+  greatBE:
+
+secrets:
+  POSTGRES_USER:
+    external: true
+  POSTGRES_PASSWORD:
+    external: true

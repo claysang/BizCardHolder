@@ -14,9 +14,10 @@ namespace BizCard.Core.Data
         public static void AddDataServices(this IServiceCollection services, IConfiguration appConfiguration)
         {
             // var connStr = appConfiguration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
+            var dbPort = appConfiguration.GetConnectionString("port");
             var dbUser = appConfiguration.GetConnectionString("user");
             var dbPwd = appConfiguration.GetConnectionString("password");
-            var connStr = "User ID =" + dbUser + ";Password=" + dbPwd + ";Server=database;Port=5432;Database=leichao;Pooling=true;";
+            var connStr = "User ID =" + dbUser + ";Password=" + dbPwd + ";Server=database;Port=" + dbPort + ";Database=leichao;Pooling=true;";
 
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
                 options.UseInternalServiceProvider(serviceProvider).UseNpgsql(connStr)
@@ -29,9 +30,11 @@ namespace BizCard.Core.Data
         {
             var services = app.ApplicationServices;
             var appConfiguration = services.GetService<IConfiguration>();
+
+            var dbPort = appConfiguration.GetConnectionString("port");
             var dbUser = appConfiguration.GetConnectionString("user");
             var dbPwd = appConfiguration.GetConnectionString("password");
-            var connStr = "User ID =" + dbUser + ";Password=" + dbPwd + ";Server=database;Port=5432;Database=leichao;Pooling=true;";
+            var connStr = "User ID =" + dbUser + ";Password=" + dbPwd + ";Server=database;Port=" + dbPort + ";Database=leichao;Pooling=true;";
 
             services.GetService<IApplicationLifetime>()
                 .ApplicationStarted

@@ -24,9 +24,10 @@ namespace BizCard.Core.Data
             var configuration = Configuration(configPath, environmentName).Build();
 
             // var connectionString = configuration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
+            var dbPort = configuration.GetConnectionString("port");
             var dbUser = configuration.GetConnectionString("user");
             var dbPwd = configuration.GetConnectionString("password");
-            var connectionString = "User ID =" + dbUser + ";Password=" + dbPwd + ";Server=database;Port=5432;Database=leichao;Pooling=true;";
+            var connectionString = "User ID =" + dbUser + ";Password=" + dbPwd + ";Server=database;Port=" + dbPort + ";Database=leichao;Pooling=true;";
 
             return CreateDbContext(connectionString);
         }
