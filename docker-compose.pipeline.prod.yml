@@ -30,7 +30,7 @@ services:
     networks:
       - greatBE
     volumes:
-      - postgresql:/var/lib/postgresql/data
+      - postgresql-prod:/var/lib/postgresql/data
       # - ./secrets:/run/secrets
     environment:
       POSTGRES_USER_FILE: /run/secrets/POSTGRES_USER
@@ -39,7 +39,7 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
 volumes:
-  postgresql:
+  postgresql-prod:
 
 networks:
   greatBE:
