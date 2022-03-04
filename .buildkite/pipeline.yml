@@ -1,0 +1,18 @@
+steps:
+  - label: ":docker: Build"
+    command: ./ops/build
+
+  - wait
+
+  - label: ":battery: Publish Image"
+    command: ./ops/pushImage
+
+  - wait
+
+  - label: ":rocket: Deploy"
+    command: ./ops/deploy
+
+  - block: ":rocket: WAIT WAIT WAIT! PROD PROD PROD!"
+
+  - label: ":rocket: Deploy to PROD"
+    command: ./ops/deployProd

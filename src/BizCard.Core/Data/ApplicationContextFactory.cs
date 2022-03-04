@@ -23,7 +23,12 @@ namespace BizCard.Core.Data
 
             var configuration = Configuration(configPath, environmentName).Build();
 
-            var connectionString = configuration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
+            // var connectionString = configuration.GetConnectionString(ConfigKeyNpgsqlConnectionString);
+            var dbUrl = configuration.GetConnectionString("url");
+            var dbPort = configuration.GetConnectionString("port");
+            var dbUser = configuration.GetConnectionString("user");
+            var dbPwd = configuration.GetConnectionString("password");
+            var connectionString = "User ID =" + dbUser + ";Password=" + dbPwd + ";Server=" + dbUrl + ";Port=" + dbPort + ";Database=leichao;Pooling=true;";
 
             return CreateDbContext(connectionString);
         }
@@ -34,7 +39,8 @@ namespace BizCard.Core.Data
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(basePath)
-                .AddJsonFile(jsonFile, true);
+                .AddJsonFile(jsonFile, true)
+                .AddEnvironmentVariables();
 
             return builder;
         }
