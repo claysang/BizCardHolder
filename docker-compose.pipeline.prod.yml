@@ -12,7 +12,7 @@ services:
       - greatBE
     environment:
       MY_SECRETS_PREFIXES: ConnectionStrings
-      ConnectionStrings__port: 65123
+      ConnectionStrings__port: 54333
     secrets:
       - source: POSTGRES_USER
         target: ConnectionStrings__user
